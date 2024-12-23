@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Http\Requests\PostRequest;
+use App\Http\Requests\PostUpdateRequest;
 
 class PostController extends Controller
 {
@@ -30,10 +32,18 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         //dd($request);
        $posts = Post::create($request->all());
+       
+
+       $file_name = time().'.'.$request->image->extension();
+       $upload = $request->image->move(public_path('images/posts/'),$file_name);
+       if($upload){
+           $posts->image = "/images/posts/".$file_name;
+       }
+
         $posts->save();
         return redirect()->route('backend.posts.index');
     }
@@ -51,15 +61,36 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::find($id);
+        $categories = Category::all();
+        return view('admin.posts.edit',compact('post','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostUpdateRequest $request, string $id)
     {
-        //
+        //echo $id;
+        //dd($request);
+
+
+        $post = Category::find($id);
+        $post->update($request->all());
+
+        if($request->hasFile('image')){
+            $file_name = time().'.'.$request->image->extension();
+            $upload = $request->image->move(public_path('images/posts/'),$file_name);
+            
+            if($upload){
+                $post->image = "/images/posts/".$file_name;
+            }
+           
+        }else {
+            $post->image = $request->old_image;
+        }
+        $post->save();
+        return redirect()->route('backend.posts.index');
     }
 
     /**
@@ -67,6 +98,9 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //echo "<h1>$id</h1>";
+        $posts = Post::find($id);
+        $posts->delete();
+        return redirect()->route('backend.posts.index');
     }
 }

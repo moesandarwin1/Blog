@@ -19,7 +19,8 @@
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.dashboard')}}">Dashboard</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.posts.index')}}">Posts</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.posts.index')}}">Categories</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.categories.index')}}">Categories</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.users.index')}}">Users</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -53,6 +54,8 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
+        <script src="{{asset('admin-assets/js/jquery.min.js')}}"></script>
         <script src="{{asset('admin-assets/js/scripts.js')}}"></script>
+        @yield('script')
     </body>
 </html>

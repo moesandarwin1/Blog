@@ -21,11 +21,23 @@
             <div class="card-body">
                 <div class="m-2">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="">
+                    <input type="text" name="name" value="{{old('name')}}" class="form-control @error ('name') is-invalid @enderror" placeholder="">
+                    @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
-                    <input class="form-control" type="file" id="formFile" name="image">
+                    <input class="form-control @error ('image') is-invalid @enderror" type="file" id="formFile" name="image">
+                    @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
                 </div>
                 <div class="d-grid gap-2">
                     <button class="btn btn-primary" type="submit">Save</button>

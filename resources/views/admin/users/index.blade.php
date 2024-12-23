@@ -1,34 +1,41 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container-fluid px-4">
-    <div class="my-5">
-        <h1 class="mt-4 d-inline">Categories</h1>
-        <a href="{{route('backend.categories.create')}}" class="btn btn-primary float-end">Create Category</a>
+    <div class="my-3">
+        <h1 class="mt-4 d-inline">User</h1>
+        <a href="{{route('backend.users.create')}}" class="btn btn-primary float-end">Create user</a>
     </div>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item active">Categories</li>
+        <li class="breadcrumb-item active">users</li>
     </ol>
+    
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Posts Lists
+            User Lists
         </div>
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Name</th>
-                        <th>Image</th>
+                        <th>User Name</th>
+                        <th>User Phone</th>
+                        <th>User Profile</th>
+                        <th>User Email</th>
+                        <th>Role</th>
                         <th>#</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>No.</th>
-                        <th>Name</th>
-                        <th>Image</th>
+                        <th>User Name</th>
+                        <th>User Phone</th>
+                        <th>User Profile</th>
+                        <th>User Email</th>
+                        <th>Role</th>
                         <th>#</th>
                     </tr>
                 </tfoot>
@@ -36,14 +43,17 @@
                     @php
                         $i = 1;
                     @endphp
-                    @foreach($categories as $category)
+                    @foreach($users as $user)
                         <tr>
                             <td>{{$i++}}</td>
-                            <td>{{$category->name}}</td>
-                            <td><img src="{{$category->image}}" width="50" height="50" alt=""></td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->phone}}</td>
+                            <td><img src="{{$user->profile}}" width="50" height="50" alt=""></td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->role}}</td>
                             <td>
-                                <a href="{{route('backend.categories.edit',$category->id)}}" class="btn btn-sm btn-warning">Edit</a>
-                                <button type="button" class="btn btn-sm btn-danger delete" data-id="{{$category->id}}">Delete</a>
+                                <a href="{{route('backend.users.edit',$user->id)}}" class="btn btn-sm btn-warning">Edit</a>
+                                <button type="button" class="btn btn-sm btn-danger delete" data-id="{{$user->id}}">Delete</button>
                             </td>
                         </tr>
                     @endforeach
@@ -51,8 +61,8 @@
             </table>
         </div>
     </div>
-
 </div>
+
 
 
 
@@ -79,6 +89,7 @@
     </div>
   </div>
 </div>
+
 @endsection
 @section('script')
     <script>
@@ -87,8 +98,9 @@
                 //alert('hello');
                 let id = $(this).data('id');
                 //console.log(id);
-                $('#deleteForm').attr('action',`categories/${id}`);
+                $('#deleteForm').attr('action',`users/${id}`);
                 $('#deleteModal').modal('show');
+                
             })
         })
     </script>
