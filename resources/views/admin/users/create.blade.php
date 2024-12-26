@@ -59,7 +59,7 @@
                     <select name="role" id="" class="form-select @error('role') is-invalid @enderror">
                         <option value="admin" selected>Admin</option>
                         <option value="user">User</option>
-                        <option value="super_admin">Super Admin</option>
+                        <option value="Super Admin">Super Admin</option>
                         
                     </select>   
                     @error('role')
