@@ -20,7 +20,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.dashboard')}}">Dashboard</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.posts.index')}}">Posts</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.categories.index')}}">Categories</a>
-                    @if(Auth::user()->role == 'Super Admin')
+                    @if(Auth::check() && Auth::user()->role == 'Super Admin')
                         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('backend.users.index')}}">Users</a>
 
                     @endif

@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory(10)->create();
-        Post::factory(20)->create();
+        //Category::factory(10)->create();
+        //Post::factory(20)->create();
 
         // User::factory(10)->create();
 
@@ -24,5 +24,13 @@ class DatabaseSeeder extends Seeder
            // 'name' => 'Test User',
            // 'email' => 'test@example.com',
        // ]);
+       User::create([
+        'name' => 'Super Admin',
+        'phone' => '09881234567',
+        'profile' => '/images/profiles/sa.png',
+        'email' => 'superadmin@gmail.com',
+        'password' => Hash::make('123456789'),
+        'role' => 'Super Admin',
+       ]);
     }
 }
